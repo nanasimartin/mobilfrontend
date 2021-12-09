@@ -2,23 +2,23 @@ import * as React from 'react';
 import { Button, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import Kviz from './Jatek';
-import Jatek from './Kviz';
+import Fooldal from './Fooldal';
+import Jatek from './Jatek';
 
 
 
 
-function Jatekoslap({ navigation }) {
-  return (
-    <Kviz/>
+function Fooldallap({ navigation }) {
+  return ( 
+   
+      <Fooldal/>  
   );
 }
 
-function Csapatoklap({ navigation }) {
+function Jateklap({ navigation }) {
   return (
-  <Jatek/>
-    );
-  
+    <Jatek/>
+  );
 }
 
 
@@ -30,9 +30,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen  name="Kviz" component={Jatekoslap} />
-        <Drawer.Screen name="Játék" component={Csapatoklap} />
+        <Drawer.Screen  name="Fő oldal" component={Fooldallap} />
+        <Drawer.Screen name="Játék" component={Jateklap} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
 }
+
