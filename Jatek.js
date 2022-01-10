@@ -12,7 +12,9 @@ export default class Jatek extends Component {
     this.state ={
       isLoading: true,
       dataSource:[], 
-      pressed:false
+      pressed:false,
+
+      lenyomva:[]
 
   }
 
@@ -34,7 +36,10 @@ componentDidMount(){
 
       });
       
-      this.kivalaszt()
+      let m=this.state.lenyomva;
+        for (let elem of this.state.dataSource)
+            m[elem.kepek_id]=0
+        this.setState({lenyomva:m})
 
     })
     .catch((error) =>{
@@ -47,9 +52,12 @@ componentDidMount(){
     
 }
                                                                                                                                                                                                                                                                                
- kivalaszt=async (szam,valasz )=>{
-  alert([szam, valasz])
- 
+ kivalaszt=async (szam,valaszszama )=>{
+  //alert([szam, valaszszama])
+  let m=this.state.lenyomva
+  m[szam]=valaszszama
+  this.setState({lenyomva:m})
+
   }
 
   
@@ -80,30 +88,58 @@ render(){
       
         <View style={{width: 50, height: 50,  flex:6, alignItems:'center'}} >
 
+{/*------------------------------------------------------------------------------------------------1*/}
+{ this.state.lenyomva[item.kerdesek_id] == 1 ?
+
         <TouchableOpacity 
-        style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
-        onPress={async()=>this.kivalaszt(item.kerdesek_id, item.kerdesek_valasz1)}
+        style={{backgroundColor:"orange",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+        onPress={async()=>this.kivalaszt(item.kerdesek_id, 1)}
  >
       
         <Text>{item.kerdesek_valasz1}</Text>
  
       </TouchableOpacity>
 
+      : 
       
-      
-       
+      <TouchableOpacity 
+        style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+        onPress={async()=>this.kivalaszt(item.kerdesek_id,1)}
+        >
+
+          <Text>{item.kerdesek_valasz1}</Text>
+
+        </TouchableOpacity>  
         
+}
         </View>
+        
+        
         <View style={{width: 50,  height: 50, flex:6, alignItems:'center'}}>
 
+{/*-------------------------------------------------------------------------------------------------2*/}
+{ this.state.lenyomva[item.kerdesek_id] == 2 ?
+
         <TouchableOpacity
-        style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10,marginTop:'auto', marginBottom:'auto',alignItems:'center'}}
+        style={{backgroundColor:"orange",width:150,margin:10,borderRadius:10, padding:10,marginTop:'auto', marginBottom:'auto',alignItems:'center'}}
         onPress={async()=>this.kivalaszt(item.kerdesek_id, item.kerdesek_valasz2)}
       >
         <Text>{item.kerdesek_valasz2}</Text>
 
       </TouchableOpacity>
 
+      :
+
+      <TouchableOpacity 
+        style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+        onPress={async()=>this.kivalaszt(item.kerdesek_id,2)}
+        >
+
+          <Text>{item.kerdesek_valasz2}</Text>
+
+        </TouchableOpacity>  
+        
+}
        </View>
 
           </View>
@@ -111,25 +147,54 @@ render(){
 
         <View style={{width: 50, height: 50,  flex:6, alignItems:'center'}} >
 
+{/*------------------------------------------------------------------------------------------------3*/}
+{ this.state.lenyomva[item.kerdesek_id] == 3 ?
         <TouchableOpacity
-        style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10,marginTop:'auto', marginBottom:'auto',alignItems:'center'}}
+        style={{backgroundColor:"orange",width:150,margin:10,borderRadius:10, padding:10,marginTop:'auto', marginBottom:'auto',alignItems:'center'}}
         onPress={async()=>this.kivalaszt(item.kerdesek_valasz3)}
       >
         <Text>{item.kerdesek_valasz3}</Text>
 
       </TouchableOpacity>
 
+:
+
+<TouchableOpacity 
+  style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+  onPress={async()=>this.kivalaszt(item.kerdesek_id,3)}
+  >
+
+    <Text>{item.kerdesek_valasz3}</Text>
+
+  </TouchableOpacity>  
+  
+}
           </View>
           <View style={{width: 50, height: 50, flex:6, alignItems:'center'}} >
-            
+
+{/*-----------------------------------------------------------------------------------------------4*/}
+{ this.state.lenyomva[item.kerdesek_id] == 4 ?
+
           <TouchableOpacity
-        style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10,marginTop:'auto', marginBottom:'auto',alignItems:'center'}}
+        style={{backgroundColor:"orange",width:150,margin:10,borderRadius:10, padding:10,marginTop:'auto', marginBottom:'auto',alignItems:'center'}}
         onPress={async()=>this.kivalaszt(item.kerdesek_valasz4)}
       >
         <Text>{item.kerdesek_valasz4}</Text>
 
       </TouchableOpacity>
 
+:
+
+<TouchableOpacity 
+  style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+  onPress={async()=>this.kivalaszt(item.kerdesek_id,4)}
+  >
+
+    <Text>{item.kerdesek_valasz4}</Text>
+
+  </TouchableOpacity>  
+  
+}
           </View>
       </View>
       
