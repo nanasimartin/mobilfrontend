@@ -25,7 +25,7 @@ export default class Jatek extends Component {
 
 
 componentDidMount(){
-  return fetch('http://172.16.0.124:3000/kerdesek')
+  return fetch('http://172.16.0.102:3000/kerdesek')
     .then((response) => response.json())
     .then((responseJson) => {
 
@@ -82,7 +82,7 @@ render(){
       <View>
 
       <Text style={{color:"brown",fontSize:20,textAlign:"center",marginTop:15,marginBottom:5}}   >{item.kerdesek_kerdes} </Text>
-      <Image  source={{uri: 'http://172.16.0.124:3000/'+item.kerdesek_kep}} style={{width:245,height:245,marginLeft:"auto",marginRight:"auto", borderRadius:12}} />
+      <Image  source={{uri: 'http://172.16.0.102:3000/'+item.kerdesek_kep}} style={{width:245,height:245,marginLeft:"auto",marginRight:"auto", borderRadius:12}} />
 
       <View style={{flex: 1, flexDirection: 'row', marginLeft:'auto', marginRight:'auto',  }}>
       
