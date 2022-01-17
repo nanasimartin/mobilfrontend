@@ -14,11 +14,14 @@ export default class Jatek extends Component {
       dataSource:[], 
       pressed:false,
 
-      lenyomva:[]
+      lenyomva:[],
+
+      nev:''
 
   }
 
 }
+
 
 
 
@@ -47,7 +50,9 @@ componentDidMount(){
     });
 
 
-    
+   
+  
+
 
     
 }
@@ -60,8 +65,39 @@ componentDidMount(){
 
   }
 
+  bekuld=async()=>{
+    //alert('asddsa')
+
+    
+      
+    
+
+     var bemenet={
+      beviteltomb:this.state.lenyomva,
+      bevitel1:this.state.nev
+
+      
+     
+    }
+    
+    fetch("http://172.16.0.102:3000/beerkezett", {
+    method: "POST",
+    body: JSON.stringify(bemenet),
+    headers: {"Content-type": "application/json; charset=UTF-8"}
+  }
   
+  )
+  .then(x => x.text())
+  .then(y => {
+  alert(y)
+  
+  });
+  
+  }
  
+  
+  
+
 
 render(){
 
@@ -75,6 +111,26 @@ render(){
 
   return(
     <View style={{flex: 1, paddingTop:20, backgroundColor:'lightgreen'}}>
+      <View style={{flex: 1, paddingTop:20, backgroundColor:'lightgreen'}}>
+
+        <TextInput placeholderTextColor="black"
+          style={{height: 40,width:'50%',alignItems:'center', alignSelf:'center',backgroundColor:'grey',borderColor:'black',color:"white",borderRadius:10, marginBottom:10}}
+          placeholder="Add meg a neved:"
+          onChangeText={(nev) => this.setState({nev})}
+          value={this.state.nev}
+          
+          />
+
+      <TouchableOpacity 
+  style={{backgroundColor:"grey",alignSelf:'center',width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+  onPress={async()=>this.bekuld()}
+  >
+
+    <Text>Elküld</Text>
+   
+  </TouchableOpacity> 
+  
+
     <FlatList
       data={this.state.dataSource}
       renderItem={({item}) => 
@@ -143,6 +199,7 @@ render(){
        </View>
 
           </View>
+         
           <View style={{flex: 1, flexDirection: 'row', marginLeft:'auto', marginRight:'auto',}}>
 
         <View style={{width: 50, height: 50,  flex:6, alignItems:'center'}} >
@@ -193,20 +250,23 @@ render(){
     <Text>{item.kerdesek_valasz4}</Text>
 
   </TouchableOpacity>  
-  
+
 }
+
           </View>
+   
+      </View>
+   
       </View>
       
-
-     
-      </View>
-    
     }
-
-    
+ 
       keyExtractor={({kerdesek_id}, index) => kerdesek_id}
     />
+ 
+ 
+</View>
+
   </View>
 );
 }
