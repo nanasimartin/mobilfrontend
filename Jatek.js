@@ -3,7 +3,7 @@ import { Text, TextInput, View, Image, ImageBackground, StyleSheet, ActivityIndi
 import { State } from 'react-native-gesture-handler';
 import { shadow } from 'react-native-paper';
 
-
+const ipcim="172.16.0.190";
 
 
 export default class Jatek extends Component {
@@ -28,7 +28,7 @@ export default class Jatek extends Component {
 
 
 componentDidMount(){
-  return fetch('http://172.16.0.102:3000/kerdesek')
+  return fetch('http://'+ipcim+':3000/kerdesek')
     .then((response) => response.json())
     .then((responseJson) => {
 
@@ -80,7 +80,7 @@ componentDidMount(){
      
     }
     
-    fetch("http://172.16.0.102:3000/beerkezett", {
+    fetch('http://'+ipcim+':3000/beerkezett', {
     method: "POST",
     body: JSON.stringify(bemenet),
     headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -113,8 +113,9 @@ render(){
     <View style={{flex: 1, paddingTop:20, backgroundColor:'lightgreen'}}>
       <View style={{flex: 1, paddingTop:20, backgroundColor:'lightgreen'}}>
 
-        <TextInput placeholderTextColor="black"
-          style={{height: 40,width:'50%',alignItems:'center', alignSelf:'center',backgroundColor:'grey',borderColor:'black',color:"white",borderRadius:10, marginBottom:10}}
+      <View style={{marginTop:13, marginBottom:13, borderColor:'Red'}}>
+   <TextInput placeholderTextColor="black"
+          style={{height: 40,width:'50%',alignItems:'center', alignSelf:'center',backgroundColor:'grey',borderColor:'black',color:"white",borderRadius:10, marginBottom:10,   }}
           placeholder="Add meg a neved:"
           onChangeText={(nev) => this.setState({nev})}
           value={this.state.nev}
@@ -122,13 +123,14 @@ render(){
           />
 
       <TouchableOpacity 
-  style={{backgroundColor:"grey",alignSelf:'center',width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+  style={{backgroundColor:"grey",alignSelf:'center',width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center', }}
   onPress={async()=>this.bekuld()}
   >
 
     <Text>Elküld</Text>
    
   </TouchableOpacity> 
+  </View>
   
 
     <FlatList
@@ -138,7 +140,7 @@ render(){
       <View>
 
       <Text style={{color:"brown",fontSize:20,textAlign:"center",marginTop:15,marginBottom:5}}   >{item.kerdesek_kerdes} </Text>
-      <Image  source={{uri: 'http://172.16.0.102:3000/'+item.kerdesek_kep}} style={{width:245,height:245,marginLeft:"auto",marginRight:"auto", borderRadius:12}} />
+      <Image  source={{uri: 'http://'+ipcim+':3000/'+item.kerdesek_kep}} style={{width:245,height:245,marginLeft:"auto",marginRight:"auto", borderRadius:12}} />
 
       <View style={{flex: 1, flexDirection: 'row', marginLeft:'auto', marginRight:'auto',  }}>
       
@@ -263,9 +265,8 @@ render(){
  
       keyExtractor={({kerdesek_id}, index) => kerdesek_id}
     />
- 
- 
-</View>
+    
+    </View>
 
   </View>
 );
@@ -282,4 +283,6 @@ kekgomb: {
   marginLeft:"auto",
   marginRight:"auto",
 }
+
+
 });
