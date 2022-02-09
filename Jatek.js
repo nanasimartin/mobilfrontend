@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Text, TextInput, View, Image, ImageBackground, StyleSheet, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
-import { State } from 'react-native-gesture-handler';
-import { shadow } from 'react-native-paper';
 
-const ipcim="172.16.0.190";
+
+const ipcim="192.168.0.107";
 
 
 export default class Jatek extends Component {
@@ -151,7 +150,7 @@ render(){
 
         <TouchableOpacity 
         style={{backgroundColor:"orange",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
-        onPress={async()=>this.kivalaszt(item.kerdesek_id, 1)}
+        onPress={async()=>this.kivalaszt(item.kerdesek_id, item.kerdesek_valasz1)}
  >
       
         <Text>{item.kerdesek_valasz1}</Text>
@@ -210,7 +209,7 @@ render(){
 { this.state.lenyomva[item.kerdesek_id] == 3 ?
         <TouchableOpacity
         style={{backgroundColor:"orange",width:150,margin:10,borderRadius:10, padding:10,marginTop:'auto', marginBottom:'auto',alignItems:'center'}}
-        onPress={async()=>this.kivalaszt(item.kerdesek_valasz3)}
+        onPress={async()=>this.kivalaszt(item.kerdesek_id,item.kerdesek_valasz3)}
       >
         <Text>{item.kerdesek_valasz3}</Text>
 
@@ -236,7 +235,7 @@ render(){
 
           <TouchableOpacity
         style={{backgroundColor:"orange",width:150,margin:10,borderRadius:10, padding:10,marginTop:'auto', marginBottom:'auto',alignItems:'center'}}
-        onPress={async()=>this.kivalaszt(item.kerdesek_valasz4)}
+        onPress={async()=>this.kivalaszt(item.kerdesek_id, item.kerdesek_valasz4)}
       >
         <Text>{item.kerdesek_valasz4}</Text>
 

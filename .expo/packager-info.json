@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19000,
-  "expoServerNgrokUrl": "https://ni-sz7.nanasimartin.mobilfrontend.exp.direct",
-  "packagerNgrokUrl": "https://packager.ni-sz7.nanasimartin.mobilfrontend.exp.direct",
-  "ngrokPid": 21844,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "packagerPid": null,
-  "webpackServerPort": 19006
+  "webpackServerPort": null
 }
