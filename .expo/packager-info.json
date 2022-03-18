@@ -4,7 +4,7 @@
   "packagerPort": 19000,
   "expoServerNgrokUrl": "https://ni-sz7.nanasimartin.mobilfrontend.exp.direct",
   "packagerNgrokUrl": "https://packager.ni-sz7.nanasimartin.mobilfrontend.exp.direct",
-  "ngrokPid": 19940,
+  "ngrokPid": 20256,
   "packagerPid": null,
-  "webpackServerPort": 19006
+  "webpackServerPort": null
 }

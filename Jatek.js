@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, TextInput, View, Image, ImageBackground, StyleSheet, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
 
 
-const ipcim="172.20.10.5";
+const ipcim="172.16.0.190";
 
 
 export default class Jatek extends Component {
@@ -16,8 +16,10 @@ export default class Jatek extends Component {
       lenyomva:[],
 
       nev:'',
+      osszjo:0,
 
       ertekel:0
+      
 
   }
 
@@ -67,8 +69,23 @@ componentDidMount(){
   }
 
   bekuld=async()=>{
-    alert(JSON.stringify(this.state.dataSource))
-    alert(this.state.lenyomva[1])
+    var db=0;
+    for (let i = 0; i < this.state.dataSource.length; i++) 
+    {
+    if(this.state.lenyomva[i+1]==this.state.dataSource[i].kerdesek_helyesid)
+    {
+     db++;
+    }
+  }
+
+
+
+    //alert(JSON.stringify(this.state.dataSource)) 
+    alert("Helyes megoldások: "+dd)
+    //alert('hali')
+
+    //alert("elso: "+this.state.lenyomva[1])
+    
 this.setState({ertekel:1})
     
       
@@ -76,8 +93,8 @@ this.setState({ertekel:1})
 
      var bemenet={
       beviteltomb:this.state.lenyomva,
-      bevitel1:this.state.nev
-
+      bevitel1:this.state.nev,
+      bevitel2:db
       
      
     }
@@ -93,13 +110,7 @@ this.setState({ertekel:1})
   .then(y => {
   //alert(JSON.stringify(this.state.dataSource))
   
-  /*for (let i = 0; i < this.state.dataSource; i++) {
-   
-    
-    if(this.state.lenyomva[i]==this.state.dataSource[i].kerdesek_helyesid)
-    {alert()}
-  }
-*/
+  
   });
   
   }
@@ -136,6 +147,7 @@ render(){
       <TouchableOpacity 
   style={{backgroundColor:"grey",alignSelf:'center',width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center', }}
   onPress={async()=>this.bekuld()}
+  
   >
 
     <Text>Elküld</Text>
@@ -298,15 +310,15 @@ render(){
  
    <View style={{width: 50, height: 50,  flex:6, alignItems:'center'}} >
 
-{/*------------------------------------------------------------------------------------------------1*/}
+ 
 
-{/* zold */}
+{/* zold !!!!!!!!!!!!!! 1-es gomb*/}
 
-{  this.state.lenyomva[item.kerdesek_id] == 1 && this.state.lenyomva[item.kerdesek_id] == item.kerdesek_helyesid ?
+{  this.state.lenyomva[item.kerdesek_id] == 1 && item.kerdesek_helyesid==1  ?
 
 <TouchableOpacity 
 style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
-onPress={async()=>this.kivalaszt(item.kerdesek_id, item.kerdesek_valasz1)}
+
 >
 
 <Text>{item.kerdesek_valasz1}</Text>
@@ -323,11 +335,11 @@ null
 
 {/* piros */}
 
-{  this.state.lenyomva[item.kerdesek_id] != 1 && this.state.lenyomva[item.kerdesek_id] != item.kerdesek_helyesid ?
+{  this.state.lenyomva[item.kerdesek_id] != 1  && item.kerdesek_helyesid==1  ?
 
 <TouchableOpacity 
-style={{backgroundColor:"red",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
-onPress={async()=>this.kivalaszt(item.kerdesek_id, item.kerdesek_valasz1)}
+style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+
 >
 
 <Text>{item.kerdesek_valasz1}</Text>
@@ -342,11 +354,29 @@ null
 
 {/* szurke */}
 
-{  this.state.lenyomva[item.kerdesek_id] == 1 &&  this.state.lenyomva[item.kerdesek_id] != item.kerdesek_helyesid ?
+{  this.state.lenyomva[item.kerdesek_id] != 1 && item.kerdesek_helyesid!=1 ?
 
 <TouchableOpacity 
 style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
-onPress={async()=>this.kivalaszt(item.kerdesek_id, item.kerdesek_valasz1)}
+
+>
+
+<Text>{item.kerdesek_valasz1}</Text>
+
+</TouchableOpacity>
+
+: 
+
+null
+
+}
+{/* narancs */}
+
+{  this.state.lenyomva[item.kerdesek_id] == 1 &&  item.kerdesek_helyesid!=1 ?
+
+<TouchableOpacity 
+style={{backgroundColor:"red",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+
 >
 
 <Text>{item.kerdesek_valasz1}</Text>
@@ -365,27 +395,81 @@ null
    <View style={{width: 50,  height: 50, flex:6, alignItems:'center'}}>
 
 {/*-------------------------------------------------------------------------------------------------2*/}
-{ this.state.lenyomva[item.kerdesek_id] == 2 ?
+{/* zold !!!!!!!!!!!!!! 1-es gomb*/}
 
-   <TouchableOpacity
-   style={{backgroundColor:"orange",width:150,margin:10,borderRadius:10, padding:10,marginTop:'auto', marginBottom:'auto',alignItems:'center'}}
-   onPress={async()=>this.kivalaszt(item.kerdesek_id, item.kerdesek_valasz2)}
- >
-   <Text>{item.kerdesek_valasz2}</Text>
+{  this.state.lenyomva[item.kerdesek_id] == 2 && item.kerdesek_helyesid==2  ?
 
- </TouchableOpacity>
+<TouchableOpacity 
+style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
 
- :
+>
 
- <TouchableOpacity 
-   style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
-   onPress={async()=>this.kivalaszt(item.kerdesek_id,2)}
-   >
+<Text>{item.kerdesek_valasz2}</Text>
 
-     <Text>{item.kerdesek_valasz2}</Text>
+</TouchableOpacity>
 
-   </TouchableOpacity>  
-   
+: 
+
+null
+
+}
+
+
+
+{/* piros */}
+
+{  this.state.lenyomva[item.kerdesek_id] != 2  && item.kerdesek_helyesid==2  ?
+
+<TouchableOpacity 
+style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+
+>
+
+<Text>{item.kerdesek_valasz2}</Text>
+
+</TouchableOpacity>
+
+: 
+
+null
+
+}
+
+{/* szurke */}
+
+{  this.state.lenyomva[item.kerdesek_id] != 2 && item.kerdesek_helyesid!=2 ?
+
+<TouchableOpacity 
+style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+
+>
+
+<Text>{item.kerdesek_valasz2}</Text>
+
+</TouchableOpacity>
+
+: 
+
+null
+
+}
+{/* narancs */}
+
+{  this.state.lenyomva[item.kerdesek_id] == 2 &&  item.kerdesek_helyesid!=2 ?
+
+<TouchableOpacity 
+style={{backgroundColor:"red",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+
+>
+
+<Text>{item.kerdesek_valasz2}</Text>
+
+</TouchableOpacity>
+
+: 
+
+null
+
 }
   </View>
 
@@ -396,54 +480,162 @@ null
    <View style={{width: 50, height: 50,  flex:6, alignItems:'center'}} >
 
 {/*------------------------------------------------------------------------------------------------3*/}
-{ this.state.lenyomva[item.kerdesek_id] == 3 ?
-   <TouchableOpacity
-   style={{backgroundColor:"orange",width:150,margin:10,borderRadius:10, padding:10,marginTop:'auto', marginBottom:'auto',alignItems:'center'}}
-   onPress={async()=>this.kivalaszt(item.kerdesek_id,item.kerdesek_valasz3)}
- >
-   <Text>{item.kerdesek_valasz3}</Text>
+{/* zold !!!!!!!!!!!!!! 1-es gomb*/}
 
- </TouchableOpacity>
-
-:
+{  this.state.lenyomva[item.kerdesek_id] == 3 && item.kerdesek_helyesid==3  ?
 
 <TouchableOpacity 
-style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
-onPress={async()=>this.kivalaszt(item.kerdesek_id,3)}
+style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+
 >
 
 <Text>{item.kerdesek_valasz3}</Text>
 
-</TouchableOpacity>  
+</TouchableOpacity>
+
+: 
+
+null
+
+}
+
+
+
+{/* piros */}
+
+{  this.state.lenyomva[item.kerdesek_id] != 3  && item.kerdesek_helyesid==3  ?
+
+<TouchableOpacity 
+style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+
+>
+
+<Text>{item.kerdesek_valasz3}</Text>
+
+</TouchableOpacity>
+
+: 
+
+null
+
+}
+
+{/* szurke */}
+
+{  this.state.lenyomva[item.kerdesek_id] != 3 && item.kerdesek_helyesid!=3 ?
+
+<TouchableOpacity 
+style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+
+>
+
+<Text>{item.kerdesek_valasz3}</Text>
+
+</TouchableOpacity>
+
+: 
+
+null
+
+}
+{/* narancs */}
+
+{  this.state.lenyomva[item.kerdesek_id] == 3 &&  item.kerdesek_helyesid!=3 ?
+
+<TouchableOpacity 
+style={{backgroundColor:"red",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+
+>
+
+<Text>{item.kerdesek_valasz3}</Text>
+
+</TouchableOpacity>
+
+: 
+
+null
 
 }
      </View>
      <View style={{width: 50, height: 50, flex:6, alignItems:'center'}} >
 
 {/*-----------------------------------------------------------------------------------------------4*/}
-{ this.state.lenyomva[item.kerdesek_id] == 4 ?
+{/* zold !!!!!!!!!!!!!! 1-es gomb*/}
 
-     <TouchableOpacity
-   style={{backgroundColor:"orange",width:150,margin:10,borderRadius:10, padding:10,marginTop:'auto', marginBottom:'auto',alignItems:'center'}}
-   onPress={async()=>this.kivalaszt(item.kerdesek_id, item.kerdesek_valasz4)}
- >
-   <Text>{item.kerdesek_valasz4}</Text>
-
- </TouchableOpacity>
-
-:
+{  this.state.lenyomva[item.kerdesek_id] == 4 && item.kerdesek_helyesid==4  ?
 
 <TouchableOpacity 
-style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
-onPress={async()=>this.kivalaszt(item.kerdesek_id,4)}
+style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+
 >
 
 <Text>{item.kerdesek_valasz4}</Text>
 
-</TouchableOpacity>  
+</TouchableOpacity>
+
+: 
+
+null
 
 }
 
+
+
+{/* piros */}
+
+{  this.state.lenyomva[item.kerdesek_id] != 4  && item.kerdesek_helyesid==4  ?
+
+<TouchableOpacity 
+style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+
+>
+
+<Text>{item.kerdesek_valasz4}</Text>
+
+</TouchableOpacity>
+
+: 
+
+null
+
+}
+
+{/* szurke */}
+
+{  this.state.lenyomva[item.kerdesek_id] != 4 && item.kerdesek_helyesid!=4 ?
+
+<TouchableOpacity 
+style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+
+>
+
+<Text>{item.kerdesek_valasz4}</Text>
+
+</TouchableOpacity>
+
+: 
+
+null
+
+}
+{/* narancs */}
+
+{  this.state.lenyomva[item.kerdesek_id] == 4 &&  item.kerdesek_helyesid!=4 ?
+
+<TouchableOpacity 
+style={{backgroundColor:"red",width:150,margin:10,borderRadius:10, padding:10, marginTop:'auto', marginBottom:'auto',alignItems:'center' }}
+
+>
+
+<Text>{item.kerdesek_valasz4}</Text>
+
+</TouchableOpacity>
+
+: 
+
+null
+
+}
      </View>
 
  </View>
