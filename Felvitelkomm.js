@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet,Text, TextInput, View,TouchableOpacity } from 'react-native';
 
-const ipcim="172.16.0.190";
+const IP = require('./ipcim.js');
+
+//const ipcim="172.16.0.110";
 
 export default class Felvitelkomm extends Component {
   constructor(props) {
@@ -26,7 +28,7 @@ felvitel=async ()=>{
       bevitel2:this.state.komment
     }
 
-    fetch('http://'+ipcim+':3000/kommentfelv',{
+    fetch('http://'+IP.ipcim+'/kommentfelv',{
       method: "POST",
       body: JSON.stringify(bemenet),
       headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -47,13 +49,14 @@ felvitel=async ()=>{
 
   render() {
     return (
-      <View style = {{}}>
+
+      <View style={{backgroundColor:'#F5F5DC'}}>
         <View style={{padding: 10, backgroundColor:'lightgreen', borderRadius:10,margin:10}}>
             <Text style={{color:'black'}}>
                 Név:
             </Text>
           <TextInput
-            placeholderTextColor="#dddddd"
+            placeholderTextColor="black"
             style={{backgroundColor:'white', marginBottom:15, borderRadius:10, height:30}}
             placeholder="Add meg a neved:"
             onChangeText={(nev) => this.setState({nev})}
@@ -64,7 +67,7 @@ felvitel=async ()=>{
                 Komment:
             </Text>
           <TextInput
-            placeholderTextColor="#dddddd"
+            placeholderTextColor="black"
             style={{backgroundColor:'white', marginBottom:15, borderRadius:10, height:30}}
             placeholder=" Add meg a kommentet:"
             onChangeText={(komment) => this.setState({komment})}

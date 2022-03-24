@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Text, TextInput, View, Image, ImageBackground, StyleSheet, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
 
+const IP = require('./ipcim.js');
 
-const ipcim="172.16.0.190";
+//const ipcim="172.16.0.110";
 
 
 export default class Jatek extends Component {
@@ -31,7 +32,7 @@ export default class Jatek extends Component {
 
 
 componentDidMount(){
-  return fetch('http://'+ipcim+':3000/kerdesek')
+  return fetch('http://'+IP.ipcim+'/kerdesek')
     .then((response) => response.json())
     .then((responseJson) => {
 
@@ -81,7 +82,7 @@ componentDidMount(){
 
 
     //alert(JSON.stringify(this.state.dataSource)) 
-    alert("Helyes megoldások: "+dd)
+    alert("Helyes megoldások: "+db)
     //alert('hali')
 
     //alert("elso: "+this.state.lenyomva[1])
@@ -99,7 +100,7 @@ this.setState({ertekel:1})
      
     }
     
-    fetch('http://'+ipcim+':3000/beerkezett', {
+    fetch('http://'+IP.ipcim+'/beerkezett', {
     method: "POST",
     body: JSON.stringify(bemenet),
     headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -131,12 +132,12 @@ render(){
 
   return(
     
-    <View style={{flex: 1, paddingTop:20, backgroundColor:'lightgreen'}}>
-      {this.state.ertekel==0 ? 
-      <View style={{flex: 1, paddingTop:20, backgroundColor:'lightgreen'}}>
+    <View style={{flex: 1, paddingTop:20, backgroundColor:'#F5F5DC'}}>
+      { this.state.ertekel==0 ? 
+      <View style={{flex: 1, paddingTop:20, backgroundColor:'#F5F5DC'}}>
 
       <View style={{marginTop:13, marginBottom:13, borderColor:'Red'}}>
-   <TextInput placeholderTextColor="black"
+   <TextInput placeholderTextColor="white"
           style={{height: 40,width:'50%',alignItems:'center', alignSelf:'center',backgroundColor:'grey',borderColor:'black',color:"white",borderRadius:10, marginBottom:10,   }}
           placeholder="Add meg a neved:"
           onChangeText={(nev) => this.setState({nev})}
@@ -150,7 +151,7 @@ render(){
   
   >
 
-    <Text>Elküld</Text>
+    <Text style={{color:'white'}}>Elküld</Text>
    
   </TouchableOpacity> 
   </View>
@@ -162,10 +163,10 @@ render(){
 
       <View>
 
-      <Text style={{color:"brown",fontSize:20,textAlign:"center",marginTop:15,marginBottom:5}}   >{item.kerdesek_kerdes} </Text>
-      <Image  source={{uri: 'http://'+ipcim+':3000/'+item.kerdesek_kep}} style={{width:245,height:245,marginLeft:"auto",marginRight:"auto", borderRadius:12}} />
+      <Text style={{color:"black",fontSize:20,textAlign:"center",marginTop:15,marginBottom:5}}   >{item.kerdesek_kerdes} </Text>
+      <Image  source={{uri: 'http://'+IP.ipcim+'/'+item.kerdesek_kep}} style={{width:245,height:245,marginLeft:"auto",marginRight:"auto", borderRadius:12}} />
 
-      <View style={{flex: 1, flexDirection: 'row', marginLeft:'auto', marginRight:'auto',  }}>
+      <View style={{flex: 1, flexDirection: 'row', marginLeft:'auto', marginRight:'auto'  }}>
       
         <View style={{width: 50, height: 50,  flex:6, alignItems:'center'}} >
 
@@ -188,7 +189,7 @@ render(){
         onPress={async()=>this.kivalaszt(item.kerdesek_id,1)}
         >
 
-          <Text>{item.kerdesek_valasz1}</Text>
+          <Text style={{color:'white'}}>{item.kerdesek_valasz1}</Text>
 
         </TouchableOpacity>  
         
@@ -216,7 +217,7 @@ render(){
         onPress={async()=>this.kivalaszt(item.kerdesek_id,2)}
         >
 
-          <Text>{item.kerdesek_valasz2}</Text>
+          <Text style={{color:'white'}}>{item.kerdesek_valasz2}</Text>
 
         </TouchableOpacity>  
         
@@ -246,7 +247,7 @@ render(){
   onPress={async()=>this.kivalaszt(item.kerdesek_id,3)}
   >
 
-    <Text>{item.kerdesek_valasz3}</Text>
+    <Text style={{color:'white'}}>{item.kerdesek_valasz3}</Text>
 
   </TouchableOpacity>  
   
@@ -272,7 +273,7 @@ render(){
   onPress={async()=>this.kivalaszt(item.kerdesek_id,4)}
   >
 
-    <Text>{item.kerdesek_valasz4}</Text>
+    <Text style={{color:'white'}}>{item.kerdesek_valasz4}</Text>
 
   </TouchableOpacity>  
 
@@ -292,9 +293,9 @@ render(){
     </View>
  :
  /*hamis ag */
- <View style={{flex: 1, paddingTop:20, backgroundColor:'lightgreen'}}>
+ <View style={{flex: 1, paddingTop:20, backgroundColor:'#F5F5DC'}}>
 
- <Text>Helyes megoldasok</Text>
+ 
 
 
 <FlatList
@@ -304,7 +305,7 @@ render(){
  <View>
 
  <Text style={{color:"brown",fontSize:20,textAlign:"center",marginTop:15,marginBottom:5}}   >{item.kerdesek_kerdes} </Text>
- <Image  source={{uri: 'http://'+ipcim+':3000/'+item.kerdesek_kep}} style={{width:245,height:245,marginLeft:"auto",marginRight:"auto", borderRadius:12}} />
+ <Image  source={{uri: 'http://'+IP.ipcim+'/'+item.kerdesek_kep}} style={{width:245,height:245,marginLeft:"auto",marginRight:"auto", borderRadius:12}} />
 
  <View style={{flex: 1, flexDirection: 'row', marginLeft:'auto', marginRight:'auto',  }}>
  
@@ -321,7 +322,7 @@ style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, padding:10,
 
 >
 
-<Text>{item.kerdesek_valasz1}</Text>
+<Text style={{color:'white'}}>{item.kerdesek_valasz1}</Text>
 
 </TouchableOpacity>
 
@@ -333,7 +334,7 @@ null
 
 
 
-{/* piros */}
+{/* zold */}
 
 {  this.state.lenyomva[item.kerdesek_id] != 1  && item.kerdesek_helyesid==1  ?
 
@@ -342,7 +343,7 @@ style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, padding:10,
 
 >
 
-<Text>{item.kerdesek_valasz1}</Text>
+<Text style={{color:'white'}}>{item.kerdesek_valasz1}</Text>
 
 </TouchableOpacity>
 
@@ -361,7 +362,7 @@ style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, 
 
 >
 
-<Text>{item.kerdesek_valasz1}</Text>
+<Text style={{color:'white'}}>{item.kerdesek_valasz1}</Text>
 
 </TouchableOpacity>
 
@@ -370,7 +371,7 @@ style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, 
 null
 
 }
-{/* narancs */}
+{/* piros */}
 
 {  this.state.lenyomva[item.kerdesek_id] == 1 &&  item.kerdesek_helyesid!=1 ?
 
@@ -379,7 +380,7 @@ style={{backgroundColor:"red",width:150,margin:10,borderRadius:10, padding:10, m
 
 >
 
-<Text>{item.kerdesek_valasz1}</Text>
+<Text style={{color:'white'}}>{item.kerdesek_valasz1}</Text>
 
 </TouchableOpacity>
 
@@ -404,7 +405,7 @@ style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, padding:10,
 
 >
 
-<Text>{item.kerdesek_valasz2}</Text>
+<Text style={{color:'white'}}>{item.kerdesek_valasz2}</Text>
 
 </TouchableOpacity>
 
@@ -416,7 +417,7 @@ null
 
 
 
-{/* piros */}
+{/* zold */}
 
 {  this.state.lenyomva[item.kerdesek_id] != 2  && item.kerdesek_helyesid==2  ?
 
@@ -425,7 +426,7 @@ style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, padding:10,
 
 >
 
-<Text>{item.kerdesek_valasz2}</Text>
+<Text style={{color:'white'}}>{item.kerdesek_valasz2}</Text>
 
 </TouchableOpacity>
 
@@ -444,7 +445,7 @@ style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, 
 
 >
 
-<Text>{item.kerdesek_valasz2}</Text>
+<Text style={{color:'white'}}>{item.kerdesek_valasz2}</Text>
 
 </TouchableOpacity>
 
@@ -453,7 +454,7 @@ style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, 
 null
 
 }
-{/* narancs */}
+{/* piros */}
 
 {  this.state.lenyomva[item.kerdesek_id] == 2 &&  item.kerdesek_helyesid!=2 ?
 
@@ -462,7 +463,7 @@ style={{backgroundColor:"red",width:150,margin:10,borderRadius:10, padding:10, m
 
 >
 
-<Text>{item.kerdesek_valasz2}</Text>
+<Text style={{color:'white'}}>{item.kerdesek_valasz2}</Text>
 
 </TouchableOpacity>
 
@@ -489,7 +490,7 @@ style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, padding:10,
 
 >
 
-<Text>{item.kerdesek_valasz3}</Text>
+<Text style={{color:'white'}}>{item.kerdesek_valasz3}</Text>
 
 </TouchableOpacity>
 
@@ -501,7 +502,7 @@ null
 
 
 
-{/* piros */}
+{/* zold */}
 
 {  this.state.lenyomva[item.kerdesek_id] != 3  && item.kerdesek_helyesid==3  ?
 
@@ -510,7 +511,7 @@ style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, padding:10,
 
 >
 
-<Text>{item.kerdesek_valasz3}</Text>
+<Text style={{color:'white'}}>{item.kerdesek_valasz3}</Text>
 
 </TouchableOpacity>
 
@@ -529,7 +530,7 @@ style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, 
 
 >
 
-<Text>{item.kerdesek_valasz3}</Text>
+<Text style={{color:'white'}}>{item.kerdesek_valasz3}</Text>
 
 </TouchableOpacity>
 
@@ -538,7 +539,7 @@ style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, 
 null
 
 }
-{/* narancs */}
+{/* piros */}
 
 {  this.state.lenyomva[item.kerdesek_id] == 3 &&  item.kerdesek_helyesid!=3 ?
 
@@ -547,7 +548,7 @@ style={{backgroundColor:"red",width:150,margin:10,borderRadius:10, padding:10, m
 
 >
 
-<Text>{item.kerdesek_valasz3}</Text>
+<Text style={{color:'white'}}>{item.kerdesek_valasz3}</Text>
 
 </TouchableOpacity>
 
@@ -569,7 +570,7 @@ style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, padding:10,
 
 >
 
-<Text>{item.kerdesek_valasz4}</Text>
+<Text style={{color:'white'}}>{item.kerdesek_valasz4}</Text>
 
 </TouchableOpacity>
 
@@ -581,7 +582,7 @@ null
 
 
 
-{/* piros */}
+{/* zold */}
 
 {  this.state.lenyomva[item.kerdesek_id] != 4  && item.kerdesek_helyesid==4  ?
 
@@ -590,7 +591,7 @@ style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, padding:10,
 
 >
 
-<Text>{item.kerdesek_valasz4}</Text>
+<Text style={{color:'white'}}>{item.kerdesek_valasz4}</Text>
 
 </TouchableOpacity>
 
@@ -609,7 +610,7 @@ style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, 
 
 >
 
-<Text>{item.kerdesek_valasz4}</Text>
+<Text style={{color:'white'}}>{item.kerdesek_valasz4}</Text>
 
 </TouchableOpacity>
 
@@ -618,7 +619,7 @@ style={{backgroundColor:"grey",width:150,margin:10,borderRadius:10, padding:10, 
 null
 
 }
-{/* narancs */}
+{/* piros */}
 
 {  this.state.lenyomva[item.kerdesek_id] == 4 &&  item.kerdesek_helyesid!=4 ?
 
@@ -627,7 +628,7 @@ style={{backgroundColor:"red",width:150,margin:10,borderRadius:10, padding:10, m
 
 >
 
-<Text>{item.kerdesek_valasz4}</Text>
+<Text style={{color:'white'}}>{item.kerdesek_valasz4}</Text>
 
 </TouchableOpacity>
 

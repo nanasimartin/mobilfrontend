@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet,Text, TextInput, View,TouchableOpacity, FlatList, RefreshControl  } from 'react-native';
 import Felvitelkomm from './Felvitelkomm';
 
-const ipcim="172.16.0.190";
+const IP = require('./ipcim.js');
+
+//const ipcim="172.16.0.110";
 
 export default class Komment extends Component {
   constructor(props) {
@@ -17,7 +19,7 @@ export default class Komment extends Component {
   }
   
   componentDidMount(){
-    return fetch('http://'+ipcim+':3000/tema')
+    return fetch('http://'+IP.ipcim+'/tema')
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -40,7 +42,7 @@ export default class Komment extends Component {
     //alert(szam)
     this.setState({})
 
-    return fetch('http://'+ipcim+':3000/tema')
+    return fetch('http://'+IP.ipcim+'/tema')
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -62,19 +64,19 @@ export default class Komment extends Component {
  
   render() {
     return (
-
-        <View style={{marginTop:25,borderColor:'black',borderStyle:'dashed', borderWidth:2}}>
+<View style={{backgroundColor:'#F5F5DC'}}>
+        <View style={{marginTop:25,borderColor:'black',borderStyle:'dotted', borderWidth:2}}>
 
 <Felvitelkomm tema_bevitel={this.state.tema}  frissit={()=>this.ujratoltes()}  />
 
-        <Text style={{fontSize:30, textAlign:'center', marginTop:25}}>Megjegyzések</Text>
+        <Text style={{fontSize:30, textAlign:'center', marginTop:25, }}>Megjegyzések</Text>
         <FlatList
           data={this.state.dataSource}
           renderItem={({item}) => 
+      
+          <View style={{backgroundColor:'lightgreen', borderRadius:15, margin:10,}}>
 
-          <View style={{backgroundColor:'lightgreen', borderRadius:15, margin:10}}>
-
-          <Text style={{color:"#1e3624",fontSize:18,marginTop:5, marginLeft:10}}>
+          <Text style={{color:"black",fontSize:18,marginTop:5, marginLeft:10}}>
           {item.uzenet_nev} </Text>
           <Text style={{color:"black",fontSize:20, marginLeft:10}}>
           {item.uzenet_szoveg} </Text>
@@ -83,12 +85,14 @@ export default class Komment extends Component {
      
    
           </View>
-        
+       
         }
     
           keyExtractor={({uzenet_id}, index) => uzenet_id}
         />
     </View>
+    </View>
+  
     );
   }
 }

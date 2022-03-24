@@ -17,23 +17,23 @@ function Fooldallap({ navigation }) {
 
     
     
-    <View style={{flex: 1, justifyContent: 'center', alignItems:'center', backgroundColor:'lightgreen'}}>
+    <View style={{flex: 1, justifyContent: 'center', alignItems:'center', backgroundColor:'#F5F5DC'}}>
       
       
     
-    <TouchableOpacity style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, alignItems:'center'}}
-          onPress={()=>navigation.navigate('Játék')}>
-          <Text style={{color:"#ccffcc",fontSize:20,textAlign:"center",marginTop:15,marginBottom:15}}>Játék</Text>
+    <TouchableOpacity style={{backgroundColor:"#535c68",width:150,margin:10,borderRadius:10, alignItems:'center'}}
+          onPress={()=>navigation.navigate('Kvíz')}>
+          <Text style={{color:"white",fontSize:20,textAlign:"center",marginTop:15,marginBottom:15}}>Kvíz</Text>
         </TouchableOpacity>
        
-        <TouchableOpacity style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, alignItems:'center'}}
-          onPress={() => {alert('blablabla');}}>
-          <Text style={{color:"#ccffcc",fontSize:20,textAlign:"center",marginTop:15,marginBottom:15}}>A játék menete</Text>
+        <TouchableOpacity style={{backgroundColor:"#535c68",width:150,margin:10,borderRadius:10, alignItems:'center'}}
+          onPress={() => {alert('Focis kvíz. Csak egyszer tudod kitölteni. 10 kérdés, kérdésenként 4 válasz. Ha úgy gondolod, hogy tudod a megoldást rá kattintasz a 4 gomb közül a szerinted helyesre, majd ha mind a 10 kérdésre válaszoltál akkor a neved beírása után elküldöd. Értesítésben megkapod hány kérdést találtál el. Ha eltaláltál egy kérdést az bezöldül, viszont ha nem akkor piros lesz, de a helyes megoldás bezöldül mellette, hogy tudd melyik lett volna a jó. Sok sikert! Remélem tetszeni fog! Mindenre válaszolj!  ');}}>
+          <Text style={{color:"white",fontSize:20,textAlign:"center",marginTop:15,marginBottom:15}}>A kvíz menete</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, alignItems:'center'}}
+        <TouchableOpacity style={{backgroundColor:"#535c68",width:150,margin:10,borderRadius:10, alignItems:'center'}}
           onPress={()=>navigation.navigate('Komment írás')}>
-          <Text style={{color:"#ccffcc",fontSize:20,textAlign:"center",marginTop:15,marginBottom:15}}>Komment írás</Text>
+          <Text style={{color:"white",fontSize:20,textAlign:"center",marginTop:15,marginBottom:15}}>Komment írás</Text>
         </TouchableOpacity>
        
      
@@ -45,30 +45,24 @@ function Fooldallap({ navigation }) {
 
 function Jateklap({ navigation }) {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center',backgroundColor:"#DCF9F4"}}>
+    
       <Jatek/>
 
-      <TouchableOpacity style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, alignItems:'center'}}
-          onPress={()=>navigation.navigate('Komment írás')}>
-          <Text style={{color:"#ccffcc",fontSize:20,textAlign:"center",marginTop:15,marginBottom:15}}>Komment irás</Text>
-        </TouchableOpacity>
       
-    </View>
+      
+    
     
   );
 }
 function Kommentlap({ navigation }) {
   return (
     
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center',backgroundColor:"#DCF9F4"}}>
+    
       <Komment/>
 
-      <TouchableOpacity style={{backgroundColor:"green",width:150,margin:10,borderRadius:10, alignItems:'center'}}
-          onPress={()=>navigation.navigate('Fő oldal')}>
-          <Text style={{color:"#ccffcc",fontSize:20,textAlign:"center",marginTop:15,marginBottom:15}}>Vissza a főoldalra</Text>
-        </TouchableOpacity>
       
-    </View>
+      
+    
   );
 }
 
@@ -82,17 +76,17 @@ export default function App() {
   return (
     <NavigationContainer >
       <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen  name="Fő oldal" component={Fooldallap} 
+        <Drawer.Screen  name="Főoldal" component={Fooldallap} 
         options={{
-          title: 'Fõ oldal',
+          title: 'Főoldal',
           headerStyle: {
-            backgroundColor: 'green',
+            backgroundColor: '#00FF00',
             
           },
-          headerTintColor: '#fff',
+          headerTintColor: 'black',
           headerTitleStyle: {
             fontWeight: 'bold',
-            color:'white'
+            color:'black'
           },
           
         }}/>
@@ -100,32 +94,32 @@ export default function App() {
 
         <Drawer.Screen name="Komment írás" component={Kommentlap} 
         options={{
-          title: 'Komment',
+          title: 'Komment írás',
           
           headerStyle: {
             
-            backgroundColor: 'green',
+            backgroundColor: '#00FF00',
           },
-          headerTintColor: '#fff',
+          headerTintColor: 'black',
           headerTitleStyle: {
             fontWeight: 'bold',
-            color:'white'
+            color:'black'
           },
           
         }}/>
         
-        <Drawer.Screen name="Játék" component={Jateklap} 
+        <Drawer.Screen name="Kvíz" component={Jateklap} 
         options={{
-          title: 'Játék',
+          title: 'Kvíz',
           
           headerStyle: {
             
-            backgroundColor: 'green',
+            backgroundColor: '#00FF00',
           },
-          headerTintColor: '#fff',
+          headerTintColor: 'black',
           headerTitleStyle: {
             fontWeight: 'bold',
-            color:'white'
+            color:'black'
           },
           
         }}/>
