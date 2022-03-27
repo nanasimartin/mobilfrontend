@@ -82,7 +82,7 @@ componentDidMount(){
 
 
     //alert(JSON.stringify(this.state.dataSource)) 
-    alert("Helyes megoldások: "+db)
+    alert("Helyes válaszok: "+"10/"+db)
     //alert('hali')
 
     //alert("elso: "+this.state.lenyomva[1])
