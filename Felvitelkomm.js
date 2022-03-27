@@ -38,7 +38,7 @@ felvitel=async ()=>{
     .then((response) => response.text())
     .then((szoveg) => {
 
-    alert(szoveg)
+    //alert(szoveg)
      this.props.frissit() 
 
 })
